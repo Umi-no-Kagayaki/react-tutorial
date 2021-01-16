@@ -1,11 +1,15 @@
 import React from 'react';
 import {List} from './List';
+import {Form} from './Form';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {description: 'クリック前の表示'};
+    this.state = {
+      description: 'クリック前の表示',
+      tab: 'list'
+    };
   }
 
   changeDescription() {
@@ -13,17 +17,36 @@ class App extends React.Component {
   }
 
   render() {
-    const description = this.state.description
+    const {tab} = this.state
 
     return (
       <div>
-        {description}
+        <header>
+          <ul>
+            <li
+              onClick = {() =>
+                this.setState({tab: 'list'})
+              }
+            >
+              リスト
+            </li>
+            <li
+              onClick = {() =>
+                this.setState({tab: 'form'})
+              }
+            >
+              フォーム
+            </li>
+          </ul>
+        </header>
 
-        <List title = '取扱言語一覧'/>
+        <hr />
 
-        <button onClick = {() => this.changeDescription()}>
-          ボタン
-        </button>
+        {
+          tab === 'list' ?
+            <List /> :
+            <Form />
+        }
       </div>
     )
   }
