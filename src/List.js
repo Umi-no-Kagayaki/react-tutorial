@@ -1,4 +1,10 @@
+import {useEffect} from 'react';
+
 export const List = ({langs}) => {
+    useEffect(() => {
+        console.log('List.js:useEffect')
+    });
+
     return (
         <div>
             {
@@ -7,5 +13,5 @@ export const List = ({langs}) => {
                 })
             }
         </div>
-    )
+    );
 }
