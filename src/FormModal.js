@@ -1,5 +1,8 @@
 import styled from 'styled-components';
 import {Modal} from './components/modal';
+import {Button} from './components/button';
+import {useContext} from 'react';
+import {ThemeContext, THEMES} from './contexts/ThemeContext';
 
 const Container = styled.div`
     padding: 24px 36px;
@@ -8,7 +11,11 @@ const Container = styled.div`
 
     width: 240px;
 
-    background-color: white;
+    color: ${({theme}) => theme.color};
+
+    background-color: ${({theme}) => theme.backgroundColor};
+
+    border: ${({theme}) => theme === THEMES.dark ? '2px solid white': 'none'}
 `
 
 const ButtonWrapper = styled.div`
@@ -20,24 +27,26 @@ const ButtonWrapper = styled.div`
 `
 
 export const FormModal = ({confirm, cancel}) => {
+    const [theme] = useContext(ThemeContext);
+
     return (
         <Modal>
-            <Container>
+            <Container theme = {theme}>
 
                 <div>本当に作成しますか？</div>
 
                 <ButtonWrapper>
-                    <button
+                    <Button
                         onClick = {cancel}
                     >
                         Cancel
-                    </button>
+                    </Button>
 
-                    <button
+                    <Button
                         onClick = {confirm}
                     >
                         OK
-                    </button>
+                    </Button>
                 </ButtonWrapper>
             </Container>
         </Modal>

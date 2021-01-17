@@ -22,6 +22,7 @@ const Container = styled.div`
 `
 
 export const Modal = (props) => {
+
     return ReactDOM.createPortal(
         <Container>
             {props.children}
